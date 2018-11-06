@@ -23,6 +23,7 @@ class Rhcl::Dump
         obj.map {|k, v|
           k = k.to_s.strip
           k = k.inspect unless k =~ /\A\w+\z/
+	  k = k.gsub(/\\|^"|"$/, '')
           k + (v.kind_of?(Hash) ? ' ' : " = ") + dump0(v, depth + 1).strip
         }.join("\n#{prefix}") +
         "\n#{prefix0}}\n"
